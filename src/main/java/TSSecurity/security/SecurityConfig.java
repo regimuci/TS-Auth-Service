@@ -20,7 +20,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @EnableWebSecurity
-public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	@Qualifier("userDetailsServiceImpl")
 	private UserDetailsService userDetailsService;
@@ -37,7 +37,6 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
 	        	.and()
 				.addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))
 				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
 				.anyRequest().permitAll();
 	}
 
